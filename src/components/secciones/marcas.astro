@@ -1,0 +1,48 @@
+---
+// Marcas de pintura con las que trabajo: banda noche a todo el ancho con el titular a la izquierda y las marcas
+// como nombres grandes en una rejilla de 2, 3 o 4 columnas separadas por filos, cada una con una muestra de color
+// y, si lo hay, qué se usa de ella. Campos: `items[]` (titulo, texto). Sin marcas se pinta solo el titular.
+import { seccion, conTitulo } from '../../data/site';
+import Titular from '../ui/Titular.astro';
+interface Props { id: string }
+const s = seccion(Astro.props.id);
+const marcas = s ? conTitulo(s.items) : [];
+const hay = !!s && !!(s.titulo || s.antetitulo || s.texto || marcas.length);
+---
+
+{
+  s && hay && (
+    <section id={Astro.props.id} class="banda banda--noche marcas-banda">
+      <div class="contenedor marcas-rejilla">
+        <Titular antetitulo={s.antetitulo} titulo={s.titulo} texto={s.texto} />
+        {marcas.length > 0 && (
+          <ul class="marcas">
+            {marcas.map((m) => (
+              <li class="marca-item">
+                <span class="marca-muestra" aria-hidden="true" />
+                <p class="marca-nombre-grande">{m.titulo}</p>
+                {m.texto && <p class="marca-texto">{m.texto}</p>}
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .marcas-banda { padding-block: clamp(3.5rem, 7vw, 6rem); }
+  .marcas-rejilla { display: grid; gap: 2rem; }
+  @media (min-width: 1000px) { .marcas-rejilla { grid-template-columns: 1fr 2.2fr; gap: clamp(3rem, 6vw, 6rem); align-items: start; } }
+  .marcas-rejilla :global(.titular) { margin-bottom: 0; }
+  .marcas-rejilla :global(.titulo-seccion) { font-size: clamp(1.9rem, 3.4vw, 3rem); }
+  .marcas { display: grid; grid-template-columns: repeat(2, 1fr); border-top: 1px solid var(--linea); }
+  @media (min-width: 640px) { .marcas { grid-template-columns: repeat(3, 1fr); } }
+  .marca-item { padding: 1.4rem 1rem 1.6rem 0; border-bottom: 1px solid var(--linea); }
+  .marca-muestra { display: block; width: 1.6rem; height: 1.6rem; background: var(--c-acento); }
+  .marca-item:nth-child(3n + 2) .marca-muestra { background: var(--m2); }
+  .marca-item:nth-child(3n) .marca-muestra { background: var(--c-fondo); }
+  .marca-nombre-grande { margin-top: .9rem; font-family: var(--fuente-titulos); font-weight: 900; font-size: clamp(1.15rem, 2vw, 1.6rem); letter-spacing: -0.02em; line-height: 1.1; overflow-wrap: anywhere; }
+  .marca-texto { margin-top: .35rem; font-size: .92rem; opacity: .75; }
+</style>

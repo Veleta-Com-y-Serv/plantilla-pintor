@@ -1,0 +1,77 @@
+---
+// Apartado de texto genérico (aquí, «Quién soy»; y los apartados nuevos del cliente: `tipo: texto`). Con `imagen`,
+// banda azul claro partida 50/50 con la foto a sangre a la derecha rematada por la pasada amarilla; sin imagen,
+// titular a la izquierda y párrafos a la derecha a todo el ancho del contenido. Campos: antetitulo, titulo,
+// texto (párrafos separados por línea en blanco), imagen, items[] (titulo, texto, icono) y cta.
+import { seccion, parrafos, conTitulo } from '../../data/site';
+import { altSeccion } from '../../lib/seo';
+import Imagen from '../ui/Imagen.astro';
+import Icono from '../ui/Icono.astro';
+interface Props { id: string }
+const s = seccion(Astro.props.id);
+const items = s ? conTitulo(s.items) : [];
+const hay = !!s && !!(s.titulo || s.antetitulo || s.texto || s.imagen || items.length);
+---
+
+{
+  s && hay && (
+    <section id={Astro.props.id} class:list={['banda banda--clara', { 'banda--sin-relleno': !!s.imagen }]}>
+      <div class:list={[s.imagen ? 'partida' : 'contenedor texto-rejilla']}>
+        <div class:list={[{ 'partida-texto partida-texto--izq': !!s.imagen }]}>
+          {s.antetitulo && <p class="antetitulo">{s.antetitulo}</p>}
+          {s.titulo && <h2 class="titulo-seccion">{s.titulo}</h2>}
+          {s.imagen && <div class="texto-cuerpo">{parrafos(s.texto).map((p) => <p>{p}</p>)}</div>}
+          {s.imagen && items.length > 0 && (
+            <ul class="texto-items">
+              {items.map((it) => (
+                <li>
+                  <span class="cuadro-icono"><Icono nombre={it.icono} tam={22} /></span>
+                  <div>
+                    <p class="font-bold">{it.titulo}</p>
+                    {it.texto && <p class="opacity-80">{it.texto}</p>}
+                  </div>
+                </li>
+              ))}
+            </ul>
+          )}
+          {s.imagen && s.cta?.url && <a class="btn btn--azul mt-8" href={s.cta.url}>{s.cta.texto}</a>}
+        </div>
+        {s.imagen ? (
+          <div class="partida-foto">
+            <Imagen src={s.imagen} alt={altSeccion(s)} ancho={1200} alto={1400} />
+          </div>
+        ) : (
+          <div>
+            <div class="texto-cuerpo texto-cuerpo--grande">{parrafos(s.texto).map((p) => <p>{p}</p>)}</div>
+            {items.length > 0 && (
+              <ul class="texto-items">
+                {items.map((it) => (
+                  <li>
+                    <span class="cuadro-icono"><Icono nombre={it.icono} tam={22} /></span>
+                    <div>
+                      <p class="font-bold">{it.titulo}</p>
+                      {it.texto && <p class="opacity-80">{it.texto}</p>}
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            )}
+            {s.cta?.url && <a class="btn btn--azul mt-8" href={s.cta.url}>{s.cta.texto}</a>}
+          </div>
+        )}
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .texto-rejilla { display: grid; gap: 2rem; }
+  @media (min-width: 900px) { .texto-rejilla { grid-template-columns: 1fr 1.3fr; gap: clamp(3rem, 7vw, 8rem); } }
+  .texto-cuerpo { margin-top: 1.5rem; display: grid; gap: 1rem; font-size: 1.1rem; opacity: .9; }
+  .texto-cuerpo p:first-child { font-family: var(--fuente-serif); font-style: italic; font-size: clamp(1.3rem, 2vw, 1.6rem); line-height: 1.4; opacity: 1; }
+  .texto-cuerpo--grande { margin-top: 0; }
+  @media (min-width: 900px) { .texto-cuerpo--grande { margin-top: 2.2rem; } }
+  .texto-items { display: grid; gap: 1.25rem; margin-top: 2.25rem; }
+  @media (min-width: 640px) { .texto-items { grid-template-columns: 1fr 1fr; } }
+  .texto-items li { display: flex; gap: 1rem; align-items: flex-start; }
+</style>

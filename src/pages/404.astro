@@ -1,0 +1,23 @@
+---
+// Página 404 con el diseño de la plantilla: banda blanca a todo el ancho con «404» enorme en azul, el final en serif
+// cursiva y, debajo, la carta de colores de borde a borde.
+import Base from '../layouts/Base.astro';
+---
+
+<Base titulo="Página no encontrada">
+  <section class="banda banda--blanca">
+    <div class="contenedor grid min-h-[56svh] content-center gap-10 md:grid-cols-2 md:items-center">
+      <p class="font-display text-[clamp(6rem,22vw,15rem)] font-black leading-none tracking-[-0.06em] text-primario" aria-hidden="true">404</p>
+      <div>
+        <p class="antetitulo">Error 404</p>
+        <h1 class="titulo-seccion">Esta pared está <span class="cursiva">sin pintar</span></h1>
+        <p class="mt-5 max-w-xl text-lg opacity-85">Puede que el enlace esté mal o que la página se haya movido.</p>
+        <p class="mt-8"><a class="btn btn--azul" href="/">Volver al inicio</a></p>
+      </div>
+    </div>
+  </section>
+  <div class="carta" style="--muestras:6" aria-hidden="true">
+    <span class="muestra"></span><span class="muestra"></span><span class="muestra"></span>
+    <span class="muestra"></span><span class="muestra"></span><span class="muestra"></span>
+  </div>
+</Base>

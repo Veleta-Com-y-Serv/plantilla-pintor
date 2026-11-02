@@ -1,0 +1,175 @@
+# Contenido de la web. Es lo único que rellena la plataforma NoExpertise.
+# Web de una sola página: el menú apunta a anclas (#id-de-sección).
+# Las secciones se muestran en el orden de este fichero. Para ocultar una: activa: false.
+# Apartado nuevo: un id propio (es su ancla, /#id) con `tipo:` = el diseño de otra sección o `texto`.
+nombre: Pinturas Arribas
+eslogan: "Pintor y decorador en Zamora. Pisos, fachadas, comunidades y locales con presupuesto cerrado."
+sector: pintor
+logo: ""          # ruta a una imagen en public/ (p. ej. /logo.svg). Vacío = inicial en una muestra de color + nombre.
+colores:
+  primario: "#1f5fd6"
+  acento: "#ffcc1a"
+  fondo: "#ffffff"
+  texto: "#13213a"
+contacto:
+  telefono: "980 52 37 14"
+  email: hola@pinturasarribas.es
+  direccion: "Calle de San Torcuato 38, 49014 Zamora (Zamora)"
+  horario: "Lunes a viernes, de 8:00 a 19:00. Sábados por la mañana, solo visitas para presupuesto."
+  whatsapp: "+34 653 28 41 97"
+redes:
+  instagram: https://www.instagram.com/
+  facebook: https://www.facebook.com/
+  linkedin: ""
+menu:
+  - { texto: Servicios, url: "/#servicios" }
+  - { texto: Trabajos, url: "/#trabajos" }
+  - { texto: Cómo trabajo, url: "/#proceso" }
+  - { texto: Zonas, url: "/#zonas" }
+  - { texto: Preguntas, url: "/#preguntas" }
+  - { texto: Contacto, url: "/#contacto" }
+boton_cabecera: { texto: Pide presupuesto, url: "/#presupuesto" }
+seo:
+  titulo: Pinturas Arribas · Pintor y decorador en Zamora
+  descripcion: "Soy Marcos Arribas, pintor en Zamora desde 2009. Pinto pisos, fachadas, comunidades y locales con presupuesto cerrado y sin manchas."
+  tipo: HousePainter
+marca_pie: true
+
+secciones:
+  hero:
+    activa: true
+    antetitulo: Pintor y decorador en Zamora
+    titulo: Tu casa recién pintada,
+    titulo_destacado: sin una sola mancha.   # final del titular, en serif cursiva
+    texto: "Soy Marcos, pintor en Zamora desde 2009. Protejo tus muebles y suelos, pinto con calma y te dejo la casa limpia. Presupuesto cerrado y por escrito."
+    imagen: /fotos/hero.jpg
+    cta: { texto: Pide tu presupuesto, url: "/#presupuesto" }
+    cta_secundario: { texto: Ver trabajos, url: "/#trabajos" }
+    items:      # promesas cortas de la carta de colores bajo la portada
+      - { titulo: Presupuesto cerrado }
+      - { titulo: Muebles y suelos protegidos }
+      - { titulo: Pinturas sin olor }
+      - { titulo: Te dejo la casa limpia }
+      - { titulo: Visita sin compromiso }
+
+  servicios:
+    activa: true
+    antetitulo: Servicios
+    titulo: Lo que pinto
+    texto: "Del dormitorio de los niños a la fachada de la comunidad. Los precios son orientativos: el tuyo, cerrado, después de ver la obra."
+    items:
+      - { titulo: Pisos y casas, texto: "Paredes y techos en plástica lisa, con reparación de grietas y desconchones antes de pintar.", icono: rodillo, precio: "desde 6 €/m²" }
+      - { titulo: Quitar gotelé, texto: "Rasco o tapo el gotelé, aliso con pasta y dejo las paredes listas para pintar en liso.", icono: pared, precio: "desde 11 €/m²" }
+      - { titulo: Fachadas, texto: "Limpieza, reparación y pintura con revestimiento elástico que aguanta el frío y la lluvia.", icono: casa, precio: "desde 14 €/m²" }
+      - { titulo: Comunidades de vecinos, texto: "Portales, escaleras y garajes con horario pactado para molestar lo mínimo.", icono: edificio, precio: "Consultar" }
+      - { titulo: Papel pintado, texto: "Quito el papel viejo, preparo la pared y coloco papel pintado o vinílico.", icono: empapelado, precio: "desde 9 €/m²" }
+      - { titulo: Lacado de puertas y muebles, texto: "Puertas, armarios y radiadores lacados en blanco o en color, con pistola y sin goteras.", icono: pistola, precio: "desde 70 €/puerta" }
+      - { titulo: Locales y oficinas, texto: "Trabajo por las tardes o en fin de semana para que no tengas que cerrar.", icono: brocha, precio: "Consultar" }
+      - { titulo: Naves y pintura industrial, texto: "Suelos de resina, estructuras metálicas y señalización de naves y talleres.", icono: nave, precio: "Consultar" }
+
+  sobre:
+    tipo: texto
+    activa: true
+    antetitulo: Quién soy
+    titulo: Marcos Arribas, pintor
+    texto: "Aprendí el oficio con mi padre en Zamora y desde 2009 trabajo por mi cuenta. Me encargo yo de cada trabajo, de la visita a la última pasada.\n\nNo subcontrato y no dejo una obra a medias para empezar otra. Te digo el precio antes de empezar y el día en que acabo, y lo cumplo."
+    imagen: /fotos/sobre.jpg
+    items:
+      - { titulo: Autónomo con seguro, texto: "Responsabilidad civil para cualquier imprevisto en tu casa.", icono: escudo }
+      - { titulo: Factura y garantía, texto: "Dos años de garantía por escrito en todos los trabajos.", icono: check }
+
+  trabajos:
+    activa: true
+    antetitulo: Trabajos hechos
+    titulo: Antes había gotelé
+    texto: "Algunas de las casas, portales y locales que he pintado en Zamora y alrededores."
+    trabajos:
+      - { titulo: Salón en blanco roto, texto: "Quité el gotelé, alisé las paredes y pinté en blanco roto con el techo en blanco puro.", lugar: "Zamora, barrio de San Lázaro", imagen: /fotos/trabajo-salon.jpg, categoria: Interior }
+      - { titulo: Fachada de casa de pueblo, texto: "Reparación de grietas y revestimiento elástico en tono arena.", lugar: Morales del Vino, imagen: /fotos/trabajo-fachada.jpg, categoria: Exterior }
+      - { titulo: Portal y escalera, texto: "Seis plantas de escalera con zócalo lavable, en dos semanas y sin cortar el paso.", lugar: "Zamora, Los Bloques", imagen: /fotos/trabajo-portal.jpg, categoria: Comunidad }
+      - { titulo: Dormitorio infantil, texto: "Pared en verde salvia con pintura sin olor; los niños durmieron en casa esa noche.", lugar: Toro, imagen: /fotos/trabajo-dormitorio.jpg, categoria: Interior }
+      - { titulo: Cafetería del centro, texto: "Paredes en azul profundo y techo negro, pintado en dos noches.", lugar: "Zamora, casco antiguo", imagen: /fotos/trabajo-cafeteria.jpg, categoria: Local }
+      - { titulo: Puertas lacadas en blanco, texto: "Nueve puertas y dos armarios de sapelly lacados en blanco satinado.", lugar: Benavente, imagen: /fotos/trabajo-puertas.jpg, categoria: Interior }
+      - { titulo: Garaje comunitario, texto: "Suelo de resina gris y plazas numeradas para cuarenta coches.", lugar: "Zamora, Pinilla", imagen: /fotos/trabajo-garaje.jpg, categoria: Comunidad }
+
+  proceso:
+    activa: true
+    antetitulo: Cómo trabajo
+    titulo: Cinco pasos y ni una sorpresa
+    texto: "Así es un trabajo conmigo, sea un dormitorio o una fachada."
+    imagen: /fotos/proceso.jpg
+    items:
+      - { titulo: Visita, texto: "Voy a ver lo que quieres pintar, mido y te aconsejo colores y acabados. Sin compromiso.", icono: casa }
+      - { titulo: Presupuesto cerrado, texto: "En dos días tienes el precio por escrito, con materiales, plazos y el día en que empiezo.", icono: euro }
+      - { titulo: Protección, texto: "Tapo suelos, muebles, enchufes y marcos con plástico, cartón y cinta antes de abrir un bote.", icono: cinta }
+      - { titulo: Pintura, texto: "Reparo, imprimo y doy las manos que hagan falta, con pinturas de calidad y sin olor.", icono: rodillo }
+      - { titulo: Limpieza, texto: "Recojo todo, limpio y repasamos juntos cada pared antes de darlo por terminado.", icono: escoba }
+
+  marcas:
+    activa: true
+    antetitulo: Materiales
+    titulo: Pinturas con las que trabajo
+    texto: "Uso pinturas profesionales que cubren bien y duran. Si prefieres una marca concreta, la compro."
+    items:
+      - { titulo: Pinturas Duero, texto: Plásticas y techos }
+      - { titulo: Esmaltes Sanabria, texto: Esmaltes al agua }
+      - { titulo: Revestimientos Tera, texto: Fachadas }
+      - { titulo: Lacas Aliste, texto: Lacas y barnices }
+      - { titulo: Papeles Sayago, texto: Papel pintado }
+      - { titulo: Resinas Esla, texto: Suelos industriales }
+
+  zonas:
+    activa: true
+    antetitulo: Dónde trabajo
+    titulo: Zamora y comarcas de alrededor
+    texto: "Voy a todos los barrios de Zamora y a los pueblos de alrededor. Si el tuyo no está, pregúntame."
+    imagen: /fotos/zonas.jpg
+    items:
+      - { titulo: Zamora capital, texto: Todos los barrios }
+      - { titulo: Morales del Vino, texto: Tierra del Vino }
+      - { titulo: Villaralbo, texto: Alfoz de Zamora }
+      - { titulo: Coreses, texto: Tierra del Pan }
+      - { titulo: Toro, texto: Alfoz de Toro }
+      - { titulo: Fuentesaúco, texto: La Guareña }
+      - { titulo: Bermillo de Sayago, texto: Sayago }
+      - { titulo: Benavente, texto: Benavente y Los Valles }
+      - { titulo: Alcañices, texto: Aliste }
+
+  opiniones:
+    activa: true
+    antetitulo: Opiniones
+    titulo: Lo que dicen en casa
+    testimonios:
+      - { texto: "Quitó el gotelé de todo el piso en una semana. Tapó cada mueble y al acabar no había ni una mota de polvo.", autor: Pilar G., servicio: "Piso completo · San José Obrero" }
+      - { texto: "El presupuesto fue el que nos dijo, ni un euro más, y acabó el día que prometió. La fachada ha quedado preciosa.", autor: Javier y Rosa, servicio: "Fachada · Morales del Vino" }
+      - { texto: "Pintó la escalera de nuestra comunidad sin molestar a nadie. Todos los vecinos contentos, que ya es decir.", autor: Comunidad Avenida de Galicia, servicio: "Portal y escalera · Zamora" }
+
+  preguntas:
+    activa: true
+    antetitulo: Preguntas frecuentes
+    titulo: Lo que me preguntan antes de empezar
+    texto: "Si tienes otra duda, escríbeme por WhatsApp y te contesto enseguida."
+    preguntas:
+      - { pregunta: "¿El presupuesto es gratis?", respuesta: "Sí. Voy a ver la obra sin coste y te mando el precio cerrado por escrito en uno o dos días." }
+      - { pregunta: "¿Tengo que vaciar las habitaciones?", respuesta: "No hace falta. Junto los muebles en el centro, los tapo con plástico y protejo el suelo. Solo te pido que guardes los objetos pequeños." }
+      - { pregunta: "¿Cuánto se tarda en pintar un piso?", respuesta: "Un piso de tres habitaciones sin gotelé, unos tres o cuatro días. Si hay que quitar gotelé, cuenta con una semana." }
+      - { pregunta: "¿Huele mucho la pintura?", respuesta: "Uso pinturas al agua de bajo olor. Puedes dormir en casa la misma noche con la ventana un poco abierta." }
+      - { pregunta: "¿Pones tú la pintura?", respuesta: "Sí, el material va incluido en el presupuesto. Si ya tienes la pintura o quieres una marca concreta, también me adapto." }
+
+  presupuesto:
+    activa: true
+    antetitulo: Presupuesto gratis
+    titulo: ¿Qué quieres pintar?
+    texto: "Cuéntame qué necesitas en dos líneas. Te llamo hoy mismo y quedamos para verlo."
+    boton_formulario: Quiero mi presupuesto
+    nota: "Sin compromiso. Si me escribes por la mañana, te llamo esa misma tarde."
+    items:
+      - { titulo: Precio cerrado, texto: "Lo que pone el presupuesto es lo que pagas.", icono: euro }
+      - { titulo: Visita sin coste, texto: "Voy a verlo y te aconsejo colores y acabados.", icono: casa }
+      - { titulo: Fecha de inicio y de fin, texto: "Por escrito, y la cumplo.", icono: calendario }
+
+  contacto:
+    activa: true
+    antetitulo: Contacto
+    titulo: Hablamos cuando quieras
+    texto: "Llámame o escríbeme por WhatsApp. Si estoy subido a la escalera, te devuelvo la llamada en cuanto bajo."

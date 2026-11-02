@@ -1,0 +1,40 @@
+---
+// Imagen con carga diferida por defecto. `prioridad` para la del hero (se carga al momento).
+// Si la foto de site.yaml (/fotos/x.jpg) aún no existe en public/, usa su respaldo /placeholders/x.svg
+// y, a falta de ese, uno genérico según la forma: franja.svg (vertical) o foto.svg (el resto). Se decide al construir.
+import { existsSync } from 'node:fs';
+import { join } from 'node:path';
+interface Props { src?: string; alt?: string; ancho?: number; alto?: number; class?: string; prioridad?: boolean }
+const { src, alt = '', ancho = 800, alto = 600, class: clase = '', prioridad = false } = Astro.props;
+
+const publico = join(process.cwd(), 'public');
+function resolver(ruta?: string) {
+  if (!ruta || !ruta.startsWith('/') || ruta.startsWith('//')) return ruta;
+  const limpia = decodeURI(ruta.split(/[?#]/)[0]);
+  if (existsSync(join(publico, limpia))) return ruta;
+  const propio = `/placeholders/${limpia.split('/').pop()!.replace(/\.[^.]+$/, '')}.svg`;
+  const generico = alto > ancho ? '/placeholders/franja.svg' : '/placeholders/foto.svg';
+  for (const respaldo of [propio, generico, '/placeholders/foto.svg']) {
+    if (existsSync(join(publico, respaldo))) return respaldo;
+  }
+  return ruta;
+}
+const ruta = resolver(src);
+// `alt` vacío = foto decorativa (también aria-hidden). Las de contenido llevan su alt (src/lib/seo.ts: altHero, altFicha…).
+---
+
+{
+  ruta && (
+    <img
+      src={ruta}
+      alt={alt}
+      aria-hidden={alt === '' ? 'true' : undefined}
+      width={ancho}
+      height={alto}
+      class={clase}
+      loading={prioridad ? 'eager' : 'lazy'}
+      decoding="async"
+      fetchpriority={prioridad ? 'high' : undefined}
+    />
+  )
+}

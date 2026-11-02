@@ -1,0 +1,47 @@
+---
+// Preguntas frecuentes en banda blanca: titular fijo a la izquierda (con botón de WhatsApp si hay número) y
+// acordeón nativo <details> a la derecha, con filos gruesos y un signo «+» en muestra amarilla. Sin JavaScript.
+// Campos: `preguntas[]` (pregunta, respuesta). Sin preguntas no se pinta. Sirve de diseño (`tipo: preguntas`).
+import { seccion, site, whatsapp } from '../../data/site';
+import Titular from '../ui/Titular.astro';
+import Icono from '../ui/Icono.astro';
+interface Props { id: string }
+const s = seccion(Astro.props.id);
+const preguntas = s ? s.preguntas.filter((p) => p && String(p.pregunta ?? '').trim()) : [];
+const wa = whatsapp(site.contacto.whatsapp, `Hola, tengo una pregunta para ${site.nombre}.`);
+---
+
+{
+  s && preguntas.length > 0 && (
+    <section id={Astro.props.id} class="banda banda--blanca">
+      <div class="contenedor faq-rejilla">
+        <div class="faq-cabeza">
+          <Titular antetitulo={s.antetitulo} titulo={s.titulo} texto={s.texto} />
+          {wa && (
+            <a class="btn btn--azul" href={wa} rel="noopener" target="_blank">
+              <Icono nombre="whatsapp" tam={20} />
+              Pregúntame por WhatsApp
+            </a>
+          )}
+        </div>
+        <div>
+          {preguntas.map((p, i) => (
+            <details class="faq" open={i === 0}>
+              <summary>
+                {p.pregunta}
+                <span class="faq-signo" aria-hidden="true" />
+              </summary>
+              {p.respuesta && <p class="faq-respuesta">{p.respuesta}</p>}
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .faq-rejilla { display: grid; gap: 2.5rem; }
+  @media (min-width: 900px) { .faq-rejilla { grid-template-columns: 1fr 1.5fr; gap: clamp(3rem, 7vw, 8rem); } .faq-cabeza { position: sticky; top: 7rem; align-self: start; } }
+  .faq-cabeza .titular { margin-bottom: 2rem; }
+</style>

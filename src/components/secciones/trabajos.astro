@@ -1,0 +1,101 @@
+---
+// Trabajos hechos: titular partido y un mosaico de fotos a sangre de borde a borde de la ventana, sin márgenes
+// (1 columna en móvil, 2 en tableta y 4 en escritorio con el primer trabajo a doble tamaño). Cada foto lleva
+// encima su categoría en una etiqueta amarilla, el título, el lugar y el texto. Si hay dos categorías o más,
+// filtros («Todos», «Interior», «Exterior»…) con un JavaScript mínimo; sin JavaScript se ven todos.
+// Campos: `trabajos[]` (titulo, texto, lugar, imagen, categoria). Sin trabajos se pinta solo el titular.
+import { seccion } from '../../data/site';
+import type { Trabajo } from '../../data/site';
+import { altFicha } from '../../lib/seo';
+import Titular from '../ui/Titular.astro';
+import Imagen from '../ui/Imagen.astro';
+interface Props { id: string }
+const s = seccion(Astro.props.id);
+const trabajos = s ? (s.trabajos as Trabajo[]).filter((t) => t && String(t.titulo ?? '').trim()).slice(0, 24) : [];
+const categorias = [...new Set(trabajos.map((t) => String(t.categoria ?? '').trim()).filter(Boolean))];
+const hay = !!s && !!(s.titulo || s.antetitulo || s.texto || trabajos.length);
+// El último trabajo se estira para que el mosaico no deje huecos: en escritorio (4 columnas, el primero ocupa 4
+// celdas) y en tableta (2 columnas).
+const restoG = (trabajos.length + 3) % 4;
+const spanG = trabajos.length > 1 && restoG ? 5 - restoG : 1;
+const spanT = trabajos.length % 2 ? 2 : 1;
+const estiloUltimo = `--span-g:${spanG};--span-t:${spanT}`;
+---
+
+{
+  s && hay && (
+    <section id={Astro.props.id} class:list={['banda banda--blanca', { 'banda--sin-pie': trabajos.length > 0 }]}>
+      <div class="contenedor cabeza">
+        <Titular antetitulo={s.antetitulo} titulo={s.titulo} />
+        {s.texto && <p class="cabeza-texto">{s.texto}</p>}
+      </div>
+      {categorias.length > 1 && (
+        <div class="contenedor trabajos-filtros" role="group" aria-label="Filtrar trabajos" hidden>
+          <button type="button" data-filtro="" aria-pressed="true">Todos</button>
+          {categorias.map((c) => <button type="button" data-filtro={c} aria-pressed="false">{c}</button>)}
+        </div>
+      )}
+      {trabajos.length > 0 && (
+        <ul class="mosaico">
+          {trabajos.map((t, i) => (
+            <li
+              class:list={['trabajo', { 'trabajo--ultimo': i === trabajos.length - 1 && i > 0 }]}
+              style={i === trabajos.length - 1 && i > 0 ? estiloUltimo : undefined}
+              data-categoria={String(t.categoria ?? '').trim()}
+            >
+              <Imagen src={t.imagen || '/placeholders/foto.svg'} alt={altFicha(t)} ancho={1000} alto={750} />
+              <div class="trabajo-pie">
+                {t.categoria && <span class="trabajo-cat">{t.categoria}</span>}
+                <h3>{t.titulo}</h3>
+                {t.lugar && <p class="trabajo-lugar">{t.lugar}</p>}
+                {t.texto && <p class="trabajo-texto">{t.texto}</p>}
+              </div>
+            </li>
+          ))}
+        </ul>
+      )}
+    </section>
+  )
+}
+
+<script is:inline>
+  document.querySelectorAll('.trabajos-filtros').forEach(function (barra) {
+    var mosaico = barra.parentElement.querySelector('.mosaico');
+    if (!mosaico) return;
+    barra.hidden = false;
+    barra.addEventListener('click', function (e) {
+      var b = e.target.closest('button');
+      if (!b) return;
+      var f = b.getAttribute('data-filtro');
+      barra.querySelectorAll('button').forEach(function (x) { x.setAttribute('aria-pressed', String(x === b)); });
+      mosaico.querySelectorAll('.trabajo').forEach(function (t) {
+        t.hidden = !!f && t.getAttribute('data-categoria') !== f;
+      });
+    });
+  });
+</script>
+
+<style>
+  .trabajos-filtros { display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 2rem; }
+  .trabajos-filtros[hidden] { display: none; }
+  .trabajos-filtros button { min-height: 2.75rem; padding: 0 1.1rem; font: inherit; font-weight: 700; color: var(--c-texto); background: var(--claro); border: 2px solid transparent; border-radius: var(--radio); cursor: pointer; }
+  .trabajos-filtros button:hover { border-color: var(--c-primario); }
+  .trabajos-filtros button[aria-pressed='true'] { background: var(--c-primario); color: #fff; }
+  .mosaico { display: grid; grid-auto-flow: dense; }
+  @media (min-width: 640px) { .mosaico { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1100px) { .mosaico { grid-template-columns: repeat(4, 1fr); } .trabajo:first-child { grid-column: span 2; grid-row: span 2; } }
+  .trabajo { position: relative; overflow: hidden; aspect-ratio: 4 / 3; background: var(--claro-fuerte); color: #fff; }
+  .trabajo[hidden] { display: none; }
+  @media (min-width: 1100px) { .trabajo:first-child { aspect-ratio: auto; } }
+  @media (min-width: 640px) and (max-width: 1099px) { .trabajo--ultimo { grid-column: span var(--span-t); aspect-ratio: calc(var(--span-t) * 4) / 3; } }
+  @media (min-width: 1100px) { .trabajo--ultimo { grid-column: span var(--span-g); aspect-ratio: calc(var(--span-g) * 4) / 3; } }
+  .trabajo :global(img) { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .6s ease; }
+  .trabajo:hover :global(img) { transform: scale(1.04); }
+  .trabajo-pie { position: absolute; left: 0; right: 0; bottom: 0; padding: 4rem var(--pad) 1.25rem; background: linear-gradient(to top, color-mix(in srgb, var(--noche) 92%, transparent), color-mix(in srgb, var(--noche) 55%, transparent) 60%, transparent); }
+  @media (min-width: 640px) { .trabajo-pie { padding-inline: 1.5rem; } }
+  .trabajo-cat { display: inline-block; padding: .2rem .6rem; background: var(--c-acento); color: var(--sobre-acento); font-size: .75rem; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; }
+  .trabajo h3 { margin-top: .6rem; font-size: clamp(1.15rem, 1.6vw, 1.4rem); }
+  .trabajo:first-child h3 { font-size: clamp(1.3rem, 2.4vw, 2.1rem); }
+  .trabajo-lugar { margin-top: .25rem; font-size: .92rem; font-weight: 700; color: var(--c-acento); }
+  .trabajo-texto { margin-top: .35rem; font-size: .95rem; opacity: .9; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+</style>

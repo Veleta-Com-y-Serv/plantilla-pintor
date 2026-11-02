@@ -1,0 +1,77 @@
+---
+// Contacto: banda blanca con el titular partido, el teléfono enorme a todo el ancho del contenido (lo primero que
+// se ve) y, debajo, WhatsApp, correo, dirección y horario en 1, 2 o 4 columnas bajo filos gruesos. Si la web no
+// tiene un apartado de presupuesto activo, añade el formulario de contacto. Todo sale de site.yaml → contacto.
+import { seccion, site, tel, whatsapp, mapa, hayDisenyo } from '../../data/site';
+import Titular from '../ui/Titular.astro';
+import Icono from '../ui/Icono.astro';
+import FormularioContacto from '../ui/FormularioContacto.astro';
+interface Props { id: string }
+const s = seccion(Astro.props.id);
+const c = site.contacto;
+const conFormulario = !hayDisenyo('presupuesto');
+const datos = [
+  c.whatsapp && { icono: 'whatsapp', etiqueta: 'WhatsApp', valor: c.whatsapp, url: whatsapp(c.whatsapp, `Hola, vengo de la web de ${site.nombre}.`), fuera: true },
+  c.email && { icono: 'correo', etiqueta: 'Correo', valor: c.email, url: `mailto:${c.email}`, fuera: false },
+  c.direccion && { icono: 'mapa', etiqueta: 'Dónde estoy', valor: c.direccion, url: mapa(c.direccion), fuera: true },
+  c.horario && { icono: 'reloj', etiqueta: 'Horario', valor: c.horario, url: '', fuera: false },
+].filter(Boolean) as { icono: string; etiqueta: string; valor: string; url: string; fuera: boolean }[];
+const hay = !!s && !!(s.titulo || s.antetitulo || s.texto || c.telefono || datos.length || conFormulario);
+---
+
+{
+  s && hay && (
+    <section id={Astro.props.id} class="banda banda--blanca">
+      <div class="contenedor">
+        <div class="cabeza">
+          <Titular antetitulo={s.antetitulo} titulo={s.titulo} />
+          {s.texto && <p class="cabeza-texto">{s.texto}</p>}
+        </div>
+        {c.telefono && (
+          <a class="contacto-tel" href={tel(c.telefono)}>
+            <span class="contacto-tel-etiqueta">Llámame</span>
+            <span class="contacto-tel-num">{c.telefono}</span>
+          </a>
+        )}
+        {datos.length > 0 && (
+          <ul class="contacto-datos">
+            {datos.map((d) => (
+              <li>
+                <span class="cuadro-icono"><Icono nombre={d.icono} tam={22} /></span>
+                <p class="dato-etiqueta">{d.etiqueta}</p>
+                {d.url ? (
+                  <a class="dato-valor" href={d.url} rel={d.fuera ? 'noopener' : undefined} target={d.fuera ? '_blank' : undefined}>{d.valor}</a>
+                ) : (
+                  <p class="dato-valor">{d.valor}</p>
+                )}
+              </li>
+            ))}
+          </ul>
+        )}
+        {conFormulario && (
+          <div class="contacto-formulario">
+            <FormularioContacto prefijo={`c-${Astro.props.id}`} />
+          </div>
+        )}
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .contacto-tel { display: block; padding-block: 1.5rem 2rem; border-top: 6px solid var(--c-acento); text-decoration: none; }
+  .contacto-tel-etiqueta { display: block; font-size: .8rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; opacity: .7; }
+  .contacto-tel-num { display: block; margin-top: .4rem; font-family: var(--fuente-titulos); font-weight: 900; font-size: clamp(2.3rem, 9vw, 7.5rem); letter-spacing: -0.045em; line-height: 1; color: var(--c-primario); }
+  .contacto-tel:hover .contacto-tel-num { text-decoration: underline; text-decoration-color: var(--c-acento); text-decoration-thickness: .08em; }
+  .contacto-datos { display: grid; gap: 0 clamp(1.5rem, 3vw, 3rem); }
+  @media (min-width: 640px) { .contacto-datos { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1100px) { .contacto-datos { grid-template-columns: repeat(4, 1fr); } }
+  .contacto-datos li { display: grid; grid-template-columns: auto 1fr; column-gap: 1rem; align-items: start; border-top: 3px solid var(--linea); padding-block: 1.25rem 1.5rem; }
+  .contacto-datos li > :not(.cuadro-icono) { grid-column: 2; }
+  .contacto-datos .cuadro-icono { grid-row: span 2; }
+  @media (min-width: 640px) { .contacto-datos li { display: block; padding-block: 1.5rem 2rem; } .contacto-datos .dato-etiqueta { margin-top: 1rem; } }
+  .dato-etiqueta { margin-top: .15rem; font-size: .78rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; opacity: .65; }
+  .dato-valor { display: block; margin-top: .35rem; font-size: 1.12rem; font-weight: 600; text-decoration: none; overflow-wrap: anywhere; }
+  a.dato-valor:hover { text-decoration: underline; text-decoration-color: var(--c-acento); text-decoration-thickness: 3px; }
+  .contacto-formulario { margin-top: 3rem; max-width: 48rem; padding: clamp(1.5rem, 3.5vw, 3rem); background: var(--claro); }
+</style>

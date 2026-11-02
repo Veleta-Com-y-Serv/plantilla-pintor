@@ -1,0 +1,100 @@
+---
+// Portada partida 50/50 a sangre: a la izquierda, la foto (pared recién pintada) hasta el borde de la ventana con
+// una pasada vertical de amarillo que la separa del texto; a la derecha, en blanco, el titular enorme en sans muy
+// pesada con el final (`titulo_destacado`) en serif cursiva, el texto, dos botones y el teléfono a la vista.
+// Debajo, la «carta de colores»: las promesas (`items`, solo `titulo`) en muestras cuadradas de borde a borde.
+// En móvil, primero el texto y luego la foto. Sin foto, la mitad de la foto es una carta de muestras grande.
+import { seccion, conTitulo, site, tel } from '../../data/site';
+import { altHero } from '../../lib/seo';
+import Imagen from '../ui/Imagen.astro';
+import Icono from '../ui/Icono.astro';
+interface Props { id: string; primera?: boolean }
+const { id, primera = false } = Astro.props;
+const s = seccion(id);
+const destacado = String(s?.titulo_destacado ?? '').trim();
+const promesas = s ? conTitulo(s.items).slice(0, 6) : [];
+const telefono = site.contacto.telefono;
+---
+
+{
+  s && (
+    <section id={id} class="portada">
+      <div class="portada-rejilla">
+        <div class="portada-texto">
+          {s.antetitulo && <p class="antetitulo">{s.antetitulo}</p>}
+          <h1 class="portada-titulo">
+            {s.titulo}
+            {destacado && (
+              <>
+                {' '}
+                <span class="cursiva">{destacado}</span>
+              </>
+            )}
+          </h1>
+          {s.texto && <p class="portada-parrafo">{s.texto}</p>}
+          {(s.cta?.url || s.cta_secundario?.url) && (
+            <div class="portada-botones">
+              {s.cta?.url && (
+                <a class="btn btn--azul" href={s.cta.url}>
+                  {s.cta.texto}
+                  <Icono nombre="flecha" tam={20} />
+                </a>
+              )}
+              {s.cta_secundario?.url && <a class="btn-sec" href={s.cta_secundario.url}>{s.cta_secundario.texto}</a>}
+            </div>
+          )}
+          {telefono && (
+            <p class="portada-tel">
+              <span class="cuadro-icono"><Icono nombre="telefono" tam={22} /></span>
+              <a href={tel(telefono)}>{telefono}</a>
+            </p>
+          )}
+        </div>
+        <div class:list={['portada-foto', { 'portada-foto--vacia': !s.imagen }]}>
+          {s.imagen ? (
+            <Imagen src={s.imagen} alt={altHero()} ancho={1400} alto={1400} prioridad={primera} />
+          ) : (
+            <span class="portada-carta" aria-hidden="true"><i /><i /><i /><i /><i /><i /></span>
+          )}
+        </div>
+      </div>
+      {
+        promesas.length > 0 && (
+          <ul class="carta" style={`--muestras:${promesas.length}`}>
+            {promesas.map((p, i) => (
+              <li class="muestra">
+                <span class="muestra-ref">Nº {String(i + 1).padStart(2, '0')}</span>
+                <span class="muestra-nombre">{p.titulo}</span>
+              </li>
+            ))}
+          </ul>
+        )
+      }
+    </section>
+  )
+}
+
+<style>
+  .portada { position: relative; }
+  .portada-rejilla { display: grid; }
+  @media (min-width: 768px) { .portada-rejilla { grid-template-columns: 1fr 1fr; min-height: calc(86svh - 4.5rem); } }
+  .portada-texto { display: flex; flex-direction: column; justify-content: center; background: var(--c-fondo); color: var(--c-texto); padding: 3.25rem var(--pad) 3rem; --ante: var(--c-acento); }
+  @media (min-width: 768px) { .portada-texto { padding: 5rem var(--lado) 5rem clamp(2.5rem, 5vw, 6rem); } }
+  .portada-titulo { font-size: clamp(2.5rem, 5.2vw, 5.6rem); line-height: .98; letter-spacing: -0.045em; margin-top: 1.25rem; }
+  .portada-titulo .cursiva { letter-spacing: -0.03em; }
+  .portada-parrafo { margin-top: 1.5rem; max-width: 34rem; font-size: clamp(1.1rem, 1.5vw, 1.3rem); opacity: .85; }
+  .portada-botones { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: 2.25rem; }
+  .portada-tel { display: flex; align-items: center; gap: .9rem; margin-top: 2rem; }
+  .portada-tel a { font-family: var(--fuente-titulos); font-weight: 900; font-size: clamp(1.4rem, 2.2vw, 1.9rem); letter-spacing: -0.02em; text-decoration: none; }
+  .portada-tel a:hover { text-decoration: underline; text-decoration-color: var(--c-acento); text-decoration-thickness: 4px; }
+  .portada-foto { position: relative; overflow: hidden; width: 100%; aspect-ratio: 4 / 3; background: var(--c-primario); }
+  @media (min-width: 768px) { .portada-foto { order: -1; aspect-ratio: auto; min-height: 100%; } }
+  .portada-foto :global(img) { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  /* Pasada de rodillo: franja amarilla entre la foto y el texto (abajo en móvil) */
+  .portada-foto::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: .75rem; background: var(--c-acento); }
+  @media (min-width: 768px) { .portada-foto::after { left: auto; top: 0; width: .9rem; height: auto; } }
+  .portada-carta { position: absolute; inset: 0; display: grid; grid-template-columns: repeat(3, 1fr); }
+  .portada-carta i:nth-child(1) { background: var(--m1); } .portada-carta i:nth-child(2) { background: var(--m2); }
+  .portada-carta i:nth-child(3) { background: var(--m3); } .portada-carta i:nth-child(4) { background: var(--m4); }
+  .portada-carta i:nth-child(5) { background: var(--m5); } .portada-carta i:nth-child(6) { background: var(--m6); }
+</style>

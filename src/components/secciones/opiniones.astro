@@ -1,0 +1,46 @@
+---
+// Opiniones: banda azul claro a todo el ancho con el titular y las opiniones en 1, 2 o 3 columnas, sin tarjetas:
+// cada una bajo un filo grueso azul con unas comillas en una muestra amarilla, el texto en serif cursiva y quién
+// la firma con el trabajo que se le hizo. Campos: `testimonios[]` (texto, autor, servicio). Sin opiniones no se pinta.
+import { seccion } from '../../data/site';
+import Titular from '../ui/Titular.astro';
+interface Props { id: string }
+const s = seccion(Astro.props.id);
+const opiniones = s ? s.testimonios.filter((t) => t && String(t.texto ?? '').trim()) : [];
+---
+
+{
+  s && opiniones.length > 0 && (
+    <section id={Astro.props.id} class="banda banda--clara">
+      <div class="contenedor">
+        <Titular antetitulo={s.antetitulo} titulo={s.titulo} texto={s.texto} />
+        <div class="opiniones">
+          {opiniones.map((t) => (
+            <figure class="opinion">
+              <span class="opinion-comillas" aria-hidden="true">“</span>
+              <blockquote>{t.texto}</blockquote>
+              {(t.autor || t.servicio) && (
+                <figcaption>
+                  {t.autor && <strong>{t.autor}</strong>}
+                  {t.servicio && <span>{t.servicio}</span>}
+                </figcaption>
+              )}
+            </figure>
+          ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .opiniones { display: grid; gap: 3rem clamp(2rem, 4vw, 4rem); }
+  @media (min-width: 760px) { .opiniones { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1100px) { .opiniones { grid-template-columns: repeat(3, 1fr); } }
+  .opinion { border-top: 6px solid var(--c-primario); padding-top: 1.5rem; }
+  .opinion-comillas { display: grid; place-items: center; width: 3rem; height: 3rem; background: var(--c-acento); color: var(--sobre-acento); font-family: var(--fuente-serif); font-size: 3rem; line-height: 1; padding-top: .9rem; }
+  .opinion blockquote { margin-top: 1.25rem; font-family: var(--fuente-serif); font-style: italic; font-size: clamp(1.2rem, 1.7vw, 1.45rem); line-height: 1.45; }
+  .opinion figcaption { display: grid; gap: .1rem; margin-top: 1.25rem; }
+  .opinion figcaption strong { font-size: 1.02rem; }
+  .opinion figcaption span { font-size: .9rem; opacity: .7; }
+</style>

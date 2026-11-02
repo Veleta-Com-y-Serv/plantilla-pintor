@@ -1,0 +1,94 @@
+# Metadatos de la plantilla para el catálogo de NoExpertise.
+id: pintor
+nombre: Pintor y decorador
+descripcion: Web para pintores autónomos con trabajos hechos, zonas, presupuesto corto y botón de llamar y WhatsApp.
+sectores:
+  - { id: pintor, nombre: Pintor }
+  - { id: pintura, nombre: Pintura }
+  - { id: decorador, nombre: Decorador }
+  - { id: empapelado, nombre: Empapelado }
+  - { id: lacado, nombre: Lacado }
+  - { id: pintura-industrial, nombre: Pintura industrial }
+secciones:
+  - { id: hero, nombre: Portada }
+  - { id: servicios, nombre: Servicios }
+  - { id: sobre, nombre: Quién soy }
+  - { id: trabajos, nombre: Trabajos hechos }
+  - { id: proceso, nombre: Cómo trabajo }
+  - { id: marcas, nombre: Pinturas y marcas }
+  - { id: zonas, nombre: Zonas }
+  - { id: opiniones, nombre: Opiniones }
+  - { id: preguntas, nombre: Preguntas frecuentes }
+  - { id: presupuesto, nombre: Presupuesto }
+  - { id: contacto, nombre: Contacto }
+estilo: fresco
+plan_minimo: gratis
+version: 1.0.0
+base: astrowind
+demo_url: https://demo-plantilla-pintor.noexpertise.com
+activa: true
+orden: 590
+
+# Asistente de puesta en marcha (NoExpertise): un paso por pantalla. Rutas del site sin índices;
+# tipos: texto y lista (la IA propone), datos, fotos, eleccion (colores y logo) y repaso.
+asistente:
+  - id: negocio
+    titulo: "Tu negocio"
+    pregunta: "¿Cómo te llamas o cómo se llama tu negocio, qué pintas y en qué localidad trabajas?"
+    ayuda: "Habla en primera persona: quién eres, desde cuándo pintas y por qué te llaman a ti."
+    tipo: texto
+    campos: [nombre, eslogan, seo.titulo, seo.descripcion, secciones.hero.antetitulo, secciones.hero.titulo, secciones.hero.titulo_destacado, secciones.hero.texto]
+  - id: contacto
+    titulo: "Cómo te encuentran"
+    pregunta: "¿A qué teléfono y WhatsApp te pueden llamar o escribir? ¿Tienes correo y redes?"
+    ayuda: "El teléfono y el WhatsApp salen en la barra fija del móvil. Lo que dejes vacío no sale en tu web."
+    tipo: datos
+    campos: [contacto.telefono, contacto.whatsapp, contacto.email, contacto.direccion, contacto.horario, redes.instagram, redes.facebook]
+  - id: sobre
+    titulo: "Quién eres"
+    pregunta: "Cuéntame tu historia: dónde aprendiste el oficio, desde cuándo trabajas por tu cuenta y cómo trabajas."
+    ayuda: "Dos o tres frases bastan. Si tienes seguro o das garantía, dilo."
+    tipo: texto
+    campos: [secciones.sobre.titulo, secciones.sobre.texto, secciones.sobre.items]
+  - id: servicios
+    titulo: "Lo que pintas"
+    pregunta: "¿Qué trabajos haces? Uno por línea, con una frase de qué incluye y, si quieres, el precio orientativo."
+    ayuda: "Pisos, quitar gotelé, fachadas, comunidades, papel pintado, lacado de puertas, locales, naves…"
+    tipo: texto
+    campos: [secciones.servicios.titulo, secciones.servicios.texto, secciones.servicios.items]
+  - id: trabajos
+    titulo: "Trabajos hechos"
+    pregunta: "Cuéntame algunos trabajos que hayas hecho: qué pintaste, dónde y si fue interior, exterior, comunidad o local."
+    ayuda: "Luego puedes poner tus fotos en cada trabajo desde Contenido."
+    tipo: lista
+    campos: [secciones.trabajos.trabajos]
+  - id: proceso
+    titulo: "Cómo trabajas"
+    pregunta: "¿Qué pasos sigues desde que te llaman hasta que entregas el trabajo limpio?"
+    tipo: texto
+    campos: [secciones.proceso.titulo, secciones.proceso.texto, secciones.proceso.items]
+  - id: zonas
+    titulo: "Zonas"
+    pregunta: "¿En qué pueblos, barrios o comarcas trabajas? Uno por línea."
+    tipo: texto
+    campos: [secciones.zonas.titulo, secciones.zonas.texto, secciones.zonas.items]
+  - id: preguntas
+    titulo: "Preguntas frecuentes"
+    pregunta: "¿Qué te preguntan antes de contratarte? Escribe cada pregunta y lo que respondes."
+    ayuda: "Si lo prefieres, añádelas luego en Contenido."
+    tipo: lista
+    campos: [secciones.preguntas.preguntas]
+  - id: fotos
+    titulo: "Tus fotos"
+    pregunta: "Pon una foto de portada de una pared o una casa que hayas pintado y, si quieres, una tuya trabajando (sin que se te vea la cara, si lo prefieres)."
+    ayuda: "Sube las tuyas o elige una del banco. Las que no cambies se quedan como están."
+    tipo: fotos
+    campos: [secciones.hero.imagen, secciones.sobre.imagen, secciones.proceso.imagen, secciones.zonas.imagen]
+  - id: aspecto
+    titulo: "Colores y logo"
+    pregunta: "Elige los colores de tu web y, si tienes, tu logo."
+    tipo: eleccion
+    campos: [colores.primario, colores.acento, logo]
+  - id: repaso
+    titulo: "Repaso"
+    tipo: repaso

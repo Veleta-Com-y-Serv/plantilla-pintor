@@ -1,0 +1,78 @@
+---
+// Presupuesto: banda partida 50/50 a sangre. A la izquierda, en azul, el titular, lo que se lleva quien lo pide
+// (`items` con icono en muestra amarilla), la `nota` y el teléfono y el WhatsApp bien grandes; a la derecha, en azul
+// claro, el formulario corto (nombre, teléfono, qué trabajo y qué necesitas). Campos: `items[]` (titulo, texto,
+// icono), `boton_formulario`, `nota`. El desplegable de trabajos sale de los servicios.
+import { seccion, site, tel, whatsapp, conTitulo, tiposDeServicio } from '../../data/site';
+import Titular from '../ui/Titular.astro';
+import Icono from '../ui/Icono.astro';
+import FormularioContacto from '../ui/FormularioContacto.astro';
+interface Props { id: string }
+const s = seccion(Astro.props.id);
+const items = s ? conTitulo(s.items) : [];
+const boton = String(s?.boton_formulario ?? '').trim() || 'Pedir presupuesto';
+const nota = String(s?.nota ?? '').trim();
+const c = site.contacto;
+const wa = whatsapp(c.whatsapp, `Hola, quiero pedir presupuesto a ${site.nombre}.`);
+---
+
+{
+  s && (
+    <section id={Astro.props.id} class="banda banda--sin-relleno presupuesto">
+      <div class="presupuesto-info banda--azul">
+        <Titular antetitulo={s.antetitulo} titulo={s.titulo} texto={s.texto} />
+        {items.length > 0 && (
+          <ul class="presupuesto-items">
+            {items.map((it) => (
+              <li>
+                <span class="cuadro-icono"><Icono nombre={it.icono} tam={24} /></span>
+                <div>
+                  <p class="font-bold text-lg">{it.titulo}</p>
+                  {it.texto && <p class="opacity-85">{it.texto}</p>}
+                </div>
+              </li>
+            ))}
+          </ul>
+        )}
+        {(c.telefono || wa) && (
+          <div class="presupuesto-directo">
+            {c.telefono && (
+              <a href={tel(c.telefono)}>
+                <Icono nombre="telefono" tam={26} />
+                {c.telefono}
+              </a>
+            )}
+            {wa && (
+              <a href={wa} rel="noopener" target="_blank">
+                <Icono nombre="whatsapp" tam={26} />
+                WhatsApp
+              </a>
+            )}
+          </div>
+        )}
+        {nota && <p class="presupuesto-nota">{nota}</p>}
+      </div>
+      <div class="presupuesto-form">
+        <FormularioContacto modelo="presupuesto" prefijo={`p-${Astro.props.id}`} boton={boton} servicios={tiposDeServicio()} />
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .presupuesto { display: grid; }
+  @media (min-width: 960px) { .presupuesto { grid-template-columns: 1fr 1fr; } }
+  .presupuesto-info { background: var(--c-primario); color: #fff; padding: clamp(4rem, 8vw, 7rem) var(--pad); --ante: var(--c-acento); --linea: rgb(255 255 255 / .24); --ante-borde: rgb(255 255 255 / .5); }
+  .presupuesto-form { background: var(--claro); color: var(--c-texto); padding: clamp(3rem, 7vw, 7rem) var(--pad); display: flex; flex-direction: column; justify-content: center; }
+  @media (min-width: 960px) {
+    .presupuesto-info { padding-left: var(--lado); padding-right: clamp(2rem, 5vw, 6rem); }
+    .presupuesto-form { padding-right: var(--lado); padding-left: clamp(2rem, 5vw, 6rem); }
+  }
+  .presupuesto-form :global(.campo input), .presupuesto-form :global(.campo textarea), .presupuesto-form :global(.campo select) { background: var(--c-fondo); }
+  .presupuesto-items { display: grid; gap: 1.4rem; }
+  .presupuesto-items li { display: flex; gap: 1rem; align-items: flex-start; }
+  .presupuesto-directo { display: flex; flex-wrap: wrap; gap: .5rem 2rem; margin-top: 2.5rem; padding-top: 1.75rem; border-top: 2px solid var(--linea); }
+  .presupuesto-directo a { display: inline-flex; align-items: center; gap: .6rem; min-height: 2.75rem; font-family: var(--fuente-titulos); font-weight: 900; font-size: clamp(1.3rem, 2.2vw, 1.8rem); letter-spacing: -0.02em; text-decoration: none; }
+  .presupuesto-directo a:hover { text-decoration: underline; text-decoration-color: var(--c-acento); text-decoration-thickness: 4px; }
+  .presupuesto-nota { margin-top: 1.5rem; font-size: .95rem; opacity: .9; }
+</style>
