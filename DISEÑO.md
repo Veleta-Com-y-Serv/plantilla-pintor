@@ -54,3 +54,8 @@ seo.ts, Base.astro, Imagen.astro, formulario `mailto`). Este fichero se queda en
 - **Qué no hacer**: volver a la portada de la base (texto sobre azul cielo y foto con esquina redonda), poner
   burbujas o esquinas redondas, usar el amarillo como color de texto sobre blanco, meter precios o cifras fijos
   en los componentes o hablar en plural de empresa.
+
+## Páginas propias (fichas y zonas)
+Con la misma piel que la portada: cabecera y pie de la plantilla, migas (Inicio › Sección › Elemento), hero con la foto del
+elemento (sin foto, su icono), `detalle` en párrafos, tabla de datos, caja de contacto, galería (`imagenes`) y otros elementos
+de la misma lista; en las zonas, entrada, texto de la zona, servicios, trabajos del lugar, opiniones y contacto.

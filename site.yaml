@@ -58,12 +58,57 @@ secciones:
     titulo: Lo que pinto
     texto: "Del dormitorio de los niños a la fachada de la comunidad. Los precios son orientativos: el tuyo, cerrado, después de ver la obra."
     items:
-      - { titulo: Pisos y casas, texto: "Paredes y techos en plástica lisa, con reparación de grietas y desconchones antes de pintar.", icono: rodillo, precio: "desde 6 €/m²" }
-      - { titulo: Quitar gotelé, texto: "Rasco o tapo el gotelé, aliso con pasta y dejo las paredes listas para pintar en liso.", icono: pared, precio: "desde 11 €/m²" }
-      - { titulo: Fachadas, texto: "Limpieza, reparación y pintura con revestimiento elástico que aguanta el frío y la lluvia.", icono: casa, precio: "desde 14 €/m²" }
-      - { titulo: Comunidades de vecinos, texto: "Portales, escaleras y garajes con horario pactado para molestar lo mínimo.", icono: edificio, precio: "Consultar" }
+      - titulo: Pisos y casas
+        texto: "Paredes y techos en plástica lisa, con reparación de grietas y desconchones antes de pintar."
+        icono: rodillo
+        precio: "desde 6 €/m²"
+        detalle: |
+          Pintar un piso o una casa empieza mucho antes de abrir el primer bote. Reviso paredes y techos, tapo grietas y desconchones, lijo lo que haga falta y doy una mano de imprimación donde la pared lo pide, para que la pintura agarre igual en toda la superficie y no queden manchas al secarse.
+
+          El acabado habitual es plástica lisa en paredes y techos, en el color que elijas. Si dudas entre tonos, te acerco muestras y las probamos sobre la propia pared con la luz de tu casa, que es la que cuenta. Trabajo habitación a habitación para que puedas seguir usando el resto de la vivienda.
+
+          Protejo suelos, muebles, enchufes y marcos antes de empezar y lo dejo todo recogido y limpio al terminar. Es un servicio pensado para quien estrena casa, para quien quiere renovar la suya o para quien tiene un piso de alquiler y necesita dejarlo listo para el siguiente inquilino.
+      - titulo: Quitar gotelé
+        texto: "Rasco o tapo el gotelé, aliso con pasta y dejo las paredes listas para pintar en liso."
+        icono: pared
+        precio: "desde 11 €/m²"
+        detalle: |
+          El gotelé es la textura rugosa que muchas casas tienen en paredes y techos desde hace décadas. Quitarlo deja las paredes lisas y actuales y hace que cualquier color se vea mejor. Es un trabajo que lleva su tiempo y su método, y por eso conviene hacerlo bien desde el principio.
+
+          Según el estado de la pared, humedezco y rasco el gotelé, o bien lo tapo con pasta fina. Después aliso con varias pasadas, lijo hasta que no se note ni un relieve y reparo cualquier golpe o fisura que haya quedado a la vista. Solo entonces imprimo y pinto en liso.
+
+          Es un trabajo que levanta polvo y humedad, así que cubro muy bien suelos, muebles y puertas con plástico y cinta, y cierro las estancias en las que trabajo. Al acabar limpio a fondo. Es una buena opción para quien va a estrenar casa o para quien lleva años queriendo olvidarse de la pared rugosa del salón.
+      - titulo: Fachadas
+        texto: "Limpieza, reparación y pintura con revestimiento elástico que aguanta el frío y la lluvia."
+        icono: casa
+        precio: "desde 14 €/m²"
+        detalle: |
+          La fachada es la primera cara de la casa y la que más castiga el tiempo: el sol, el hielo del invierno y la lluvia van deshaciendo la pintura y abriendo pequeñas grietas por las que entra el agua. Pintarla a tiempo protege el muro y evita arreglos mucho mayores.
+
+          El trabajo empieza limpiando la superficie y quitando la pintura suelta y los restos de humedad. Después reparo grietas y desconchones con mortero y selladores adecuados, aplico una imprimación y termino con un revestimiento elástico que sigue los movimientos del muro sin agrietarse y deja pasar el vapor de agua.
+
+          Antes de empezar te propongo colores que combinen con el entorno y con las normas del pueblo o de la comunidad, si las hay. Trabajo con el material de seguridad necesario cuando hay que subir, y planifico la obra según el tiempo, porque con lluvia no se debe pintar una fachada.
+      - titulo: Comunidades de vecinos
+        texto: "Portales, escaleras y garajes con horario pactado para molestar lo mínimo."
+        icono: edificio
+        precio: "Consultar"
+        detalle: |
+          Pintar los espacios comunes de un edificio es un trabajo en el que cuenta tanto la pintura como la manera de trabajar. Hay vecinos que entran y salen cada día, niños, personas mayores y carritos, y la obra tiene que molestar lo mínimo y no dejar nada peligroso a su paso.
+
+          Pinto portales, escaleras, descansillos y garajes, con zócalos lavables en las zonas que más se ensucian y pinturas resistentes al roce. Pacto con la administración o con el presidente un horario y un orden de trabajo, aviso a los vecinos con un cartel y dejo las zonas de paso despejadas y señalizadas.
+
+          Presento un presupuesto por escrito que se puede llevar a la junta, con los trabajos, los materiales y los plazos detallados, para que la decisión se tome con toda la información. Al terminar repaso cada tramo con quien me lo pida y dejo la escalera limpia.
       - { titulo: Papel pintado, texto: "Quito el papel viejo, preparo la pared y coloco papel pintado o vinílico.", icono: empapelado, precio: "desde 9 €/m²" }
-      - { titulo: Lacado de puertas y muebles, texto: "Puertas, armarios y radiadores lacados en blanco o en color, con pistola y sin goteras.", icono: pistola, precio: "desde 70 €/puerta" }
+      - titulo: Lacado de puertas y muebles
+        texto: "Puertas, armarios y radiadores lacados en blanco o en color, con pistola y sin goteras."
+        icono: pistola
+        precio: "desde 70 €/puerta"
+        detalle: |
+          Lacar es la forma de renovar puertas, armarios, cocinas o radiadores sin tener que cambiarlos. Con una buena preparación, un lacado con pistola deja un acabado fino y uniforme, sin marcas de brocha ni goteras, y con una dureza que aguanta el uso diario.
+
+          El proceso incluye desmontar herrajes y tiradores, limpiar y lijar la superficie, tapar poros y golpes, imprimar y aplicar varias manos finas de laca, con el secado entre ellas. Según el caso se trabaja en la propia casa, cubriendo todo lo que no se lacea, o se desmontan las piezas para lacarlas con más comodidad.
+
+          Se puede elegir blanco o cualquier color, en acabado mate, satinado o brillante. Es muy habitual lacar en blanco puertas de madera oscura para dar luz a un pasillo, o renovar los armarios de una cocina antigua para darle un aire distinto sin hacer obra.
       - { titulo: Locales y oficinas, texto: "Trabajo por las tardes o en fin de semana para que no tengas que cerrar.", icono: brocha, precio: "Consultar" }
       - { titulo: Naves y pintura industrial, texto: "Suelos de resina, estructuras metálicas y señalización de naves y talleres.", icono: nave, precio: "Consultar" }
 
@@ -124,16 +169,27 @@ secciones:
     titulo: Zamora y comarcas de alrededor
     texto: "Voy a todos los barrios de Zamora y a los pueblos de alrededor. Si el tuyo no está, pregúntame."
     imagen: /fotos/zonas.jpg
+    titulo_pagina: "Pintores en {zona}"
+    texto_pagina: "Pintura de interiores, fachadas, comunidades y locales en {zona}, con visita sin compromiso y precio cerrado por escrito."
     items:
-      - { titulo: Zamora capital, texto: Todos los barrios }
-      - { titulo: Morales del Vino, texto: Tierra del Vino }
-      - { titulo: Villaralbo, texto: Alfoz de Zamora }
-      - { titulo: Coreses, texto: Tierra del Pan }
-      - { titulo: Toro, texto: Alfoz de Toro }
-      - { titulo: Fuentesaúco, texto: La Guareña }
-      - { titulo: Bermillo de Sayago, texto: Sayago }
-      - { titulo: Benavente, texto: Benavente y Los Valles }
-      - { titulo: Alcañices, texto: Aliste }
+      - titulo: Zamora capital
+        texto: "Trabajo en todos los barrios de Zamora: pisos del centro y del casco antiguo, viviendas de los barrios nuevos, portales y escaleras de comunidades, locales y oficinas. Al vivir y trabajar aquí, puedo ir a ver tu obra, medir y darte el presupuesto cerrado en poco tiempo.\n\nLos trabajos más habituales en la capital son pintar pisos enteros, quitar gotelé, renovar portales y lacar puertas. En el casco antiguo cuido especialmente el acceso y el ruido, y en los edificios con vecinos acuerdo el horario para molestar lo menos posible. Si tu obra está en un pueblo cercano, como Villaralbo o Morales del Vino, también voy."
+      - titulo: Morales del Vino
+        texto: "Morales del Vino queda a las puertas de Zamora, en la Tierra del Vino, y allí he pintado tanto casas de pueblo como chalets y fachadas. Es una zona donde se pide mucho renovar la fachada con revestimientos que aguanten el frío del invierno y el sol del verano.\n\nTambién hago interiores: salones, dormitorios, cocinas y escaleras. Al estar tan cerca de la capital, suelo combinar la visita con otros trabajos de la comarca y te lo cuento antes de empezar para que la obra quede cerrada en precio y en fecha. Si vives en Villaralbo o en Coreses, también te atiendo."
+      - titulo: Villaralbo
+        texto: "Villaralbo está a un paso de Zamora, en el alfoz de la capital, y allí pinto sobre todo viviendas unifamiliares, adosados y pisos de urbanizaciones. Son casas pensadas para vivir, con salones amplios, escaleras y habitaciones que se renuevan cuando cambian los gustos o llegan los niños.\n\nHago el trabajo completo: reparación de paredes, quitar gotelé si lo hay, imprimación y pintura en el color que elijas, con muestras sobre tu propia pared. También pinto fachadas y lacado de puertas y armarios. Como estoy cerca, la visita y el presupuesto cerrado llegan enseguida. Si vives en Morales del Vino o en Coreses, también me desplazo hasta tu casa."
+      - titulo: Coreses
+        texto: "En Coreses y en la Tierra del Pan trabajo con casas de pueblo, fachadas y locales. Son viviendas con carácter que piden una buena preparación del muro antes de pintar: limpio, reparo grietas y aplico un revestimiento que aguante el frío y la lluvia de la comarca.\n\nPor dentro hago paredes y techos en plástica lisa, empapelado y lacado de puertas. Si tu obra está cerca de Villaralbo o de Toro, aprovecho el viaje para ver varios trabajos el mismo día y no tener que cobrarte desplazamientos de más. Te explico lo que haría, te doy el precio por escrito y, si te encaja, fijamos fecha."
+      - titulo: Toro
+        texto: "En Toro y su alfoz trabajo con casas antiguas, de gruesos muros de piedra y adobe, que piden una preparación cuidadosa antes de pintar. Reparo con los materiales adecuados, dejo respirar la pared y aplico pinturas que aguantan los cambios de temperatura de la comarca.\n\nAdemás de fachadas y casas de pueblo, pinto pisos y locales, y laco puertas y ventanas de madera. Me desplazo desde Zamora y, si tu obra está en un pueblo cercano como Morales del Vino o Fuentesaúco, la combinamos para que sea más cómodo. Llámame y vamos a ver lo que necesitas."
+      - titulo: Fuentesaúco
+        texto: "En Fuentesaúco y en la comarca de la Guareña pinto casas de pueblo, fachadas, locales y naves. Es una zona de casas amplias donde el trabajo suele ser de exterior, y por eso cuento con el tiempo y con la época del año para que la pintura se seque bien y dure.\n\nTambién trabajo en interiores, con paredes y techos en plástica lisa, quitando gotelé si hace falta. Si tu obra está cerca de Toro o de Coreses, puedo aprovechar el viaje y hacerte la visita en el mismo día. Pide presupuesto sin compromiso y te digo el precio por escrito."
+      - titulo: Bermillo de Sayago
+        texto: "Bermillo de Sayago es la puerta de la comarca de Sayago, una zona de casas de piedra y pueblos pequeños en la que se agradece que el pintor vaya hasta allí. Pinto fachadas y puertas de madera, interiores de casas de pueblo y también locales y bares del municipio.\n\nEn las casas de piedra y de adobe cuido que el material respire: reparo con morteros adecuados y elijo pinturas transpirables para que no salga humedad. Si tienes una casa de fin de semana que quieres dejar lista para el verano, lo organizamos con tiempo y te la entrego limpia. Pregunta por tu pueblo si no lo ves en la lista, que seguramente también llego."
+      - titulo: Benavente
+        texto: "Benavente es la capital de Los Valles y allí tengo clientes de casas, locales y comunidades de vecinos. He pintado desde puertas lacadas en blanco hasta pisos completos, siempre con visita previa, presupuesto por escrito y fecha de entrega pactada.\n\nSi tu vivienda es un piso en un edificio, preparo bien los accesos y cuido a los vecinos; si es una casa con patio o un local comercial, me adapto a tus horarios, incluidas las tardes y los fines de semana, para que no tengas que cerrar el negocio. También atiendo los pueblos de Los Valles que quedan cerca de Benavente. Cuéntame qué quieres pintar y vamos a verlo."
+      - titulo: Alcañices
+        texto: "Alcañices es el centro de la comarca de Aliste, en el oeste de la provincia. Me desplazo hasta allí para pintar casas, fachadas, locales y alguna nave, y cuando hay varios vecinos del entorno interesados agrupo las visitas para ahorrar viajes.\n\nEs un territorio de inviernos fríos, así que en las fachadas elijo revestimientos que aguanten los cambios de temperatura y las heladas, y planifico la obra para la mejor época del año. Dentro de casa hago paredes lisas, techos, lacado de puertas y papel pintado. Llámame, cuéntame qué quieres pintar y vamos a verlo sin compromiso; te digo el precio cerrado por escrito antes de empezar."
 
   opiniones:
     activa: true
