@@ -13,6 +13,7 @@ import { seccion, site, tel, whatsapp } from '../../data/site';
 import { enlaceDe, introZona, resumen, tituloZona, trabajosEn, zonasConPagina } from '../../lib/paginas';
 import type { Zona } from '../../lib/paginas';
 import { jsonLdMigas, jsonLdZona, urlBase } from '../../lib/seo';
+import { enlace, rutaDeSeccion } from '../../lib/multipagina';
 
 export function getStaticPaths() {
   return zonasConPagina().map((z) => ({ params: { slug: z.slug }, props: { z } }));
@@ -26,7 +27,7 @@ const intro = introZona(z);
 const nombreSeccion = String(z.seccion.antetitulo || z.seccion.titulo || 'Zonas').trim();
 const migas = [
   { nombre: 'Inicio', ruta: '/' },
-  { nombre: nombreSeccion, ruta: `/#${z.idSeccion}` },
+  { nombre: nombreSeccion, ruta: rutaDeSeccion(z.idSeccion) },
   { nombre: z.nombre, ruta: z.url },
 ];
 const c = site.contacto;
@@ -38,7 +39,7 @@ const opinionesSec = seccion('opiniones');
 const todas = opinionesSec ? opinionesSec.testimonios.filter((t) => t?.texto) : [];
 const nombra = (t: { texto: string; servicio?: string }) => `${t.texto} ${t.servicio ?? ''}`.toLowerCase().includes(z.nombre.toLowerCase());
 const opiniones = [...todas.filter(nombra), ...todas.filter((t) => !nombra(t))].slice(0, 3);
-const presupuesto = seccion('presupuesto') ? '/#presupuesto' : site.boton_cabecera?.url || '/#contacto';
+const presupuesto = seccion('presupuesto') ? enlace('/#presupuesto') : site.boton_cabecera?.url || enlace('/#contacto');
 const textoPresupuesto = site.boton_cabecera?.texto || 'Pide presupuesto';
 const wa = whatsapp(c.whatsapp, `Hola, quiero presupuesto para pintar en ${z.nombre}`);
 const otras = zonasConPagina().filter((x) => x !== z);
